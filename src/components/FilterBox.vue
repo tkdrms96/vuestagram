@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-item" :style="`background-image:url(${url})`"></div> 
+  <div :class="" class="filter-item" :style="`background-image:url(${url})`"></div> 
 </template>
 
 <script>
