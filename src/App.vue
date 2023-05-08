@@ -4,20 +4,24 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++;">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :data = "data"/>
+  <Container :data = "data" :step= "step" :url = "url"/>
   <button @click="more">더보기</button>
-
+  
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
- </div>
+  </div>
+  
+  <button @click="step = 0">전체보기</button>
+  <button @click="step = 1">상세보기</button>
+  <button @click="step = 2">등록하기</button>
 </template>
 
 <script>
@@ -30,19 +34,30 @@ export default {
   name: 'App',
   components: {
     Container,
-  },d
+  },
   data(){
     return {
+      step : 0,
       data : data,
+      url : '',
     }
   },
   methods:{
     more(){
+      //axios.post('URL' , {name : 'kim'}).then().catch((err)=> {});
       axios.get('https://codingapple1.github.io/vue/more0.json')
       .then((data) => {
+        console.log(data.data);
         this.data.push(data.data);      
       })
     },
+    upload(e){
+      let a = e.target.files;
+      console.log(e);
+      let url = URL.createObjectURL(a[0]);
+      this.url = url;
+      this.step++;
+    }
 
   }
 }
