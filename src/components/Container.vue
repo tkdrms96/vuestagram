@@ -7,18 +7,14 @@
     <div v-if="step == 1">
         <div class="upload-image" :style="`background-image:url(${url})`"></div>
         <div class="filters">
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
+            <FilterBox :url="url" v-for="a in filterData" :key="a"></FilterBox>
         </div>
     </div>
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
         <div class="upload-image" :style="`background-image:url(${url})`"></div>
         <div class="write">
-            <textarea class="write-box">write!</textarea>
+            <textarea class="write-box" @input="$emit('write', $event.target.value)">write!</textarea>
         </div>
     </div>
 
@@ -28,15 +24,22 @@
 <script>
 
 import Post from './Post.vue'
-
+import FilterBox from './FilterBox.vue'
+import filterData from './assets/filterData.js';
 export default {
     components : {
         Post, 
+        FilterBox,
     },
     props : {
         data : Array,
         step : Number,
         url : String,
+    },
+    data(){
+        return {
+            filterData : filterData,
+        }
     }
 }
 </script>
@@ -58,7 +61,7 @@ export default {
     background-color: cornflowerblue;
     margin: 10px 10px 10px auto;
     padding: 8px;
-    display: inline-block;
+    display: inli0-block;
     color : white;
     background-size: cover;
     }

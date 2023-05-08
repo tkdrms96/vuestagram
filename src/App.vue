@@ -4,7 +4,8 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="step++;">Next</li>
+      <li v-if="step == 1" @click="step++;">Next</li>
+      <li v-if="step == 2" @click="publish">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
@@ -40,9 +41,24 @@ export default {
       step : 0,
       data : data,
       url : '',
+      작성한글 : '',
     }
   },
   methods:{
+    publish(){
+      var 내게시물 = {
+      name: "Kim Hyun",
+      userImage: "https://placeimg.com/100/100/arch",
+      postImage: this.url,
+      likes: 36,
+      date: "May 15",
+      liked: false,
+      content: this.작성한글,
+      filter: "perpetua"
+    };
+      this.data.unshift(내게시물);
+      this.step = 0;
+    },
     more(){
       //axios.post('URL' , {name : 'kim'}).then().catch((err)=> {});
       axios.get('https://codingapple1.github.io/vue/more0.json')
