@@ -40,7 +40,6 @@ export default {
     more(){
       axios.get('https://codingapple1.github.io/vue/more0.json')
       .then((data) => {
-        
         this.data.push(data.data);      
       })
     },
