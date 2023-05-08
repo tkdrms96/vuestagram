@@ -30,7 +30,7 @@ export default {
   name: 'App',
   components: {
     Container,
-  },ssss
+  },
   data(){
     return {
       data : data,
